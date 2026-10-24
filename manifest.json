@@ -1,0 +1,15 @@
+{
+    "name": "RockList Setlist",
+    "short_name": "RockList",
+    "start_url": "/index.html",
+    "display": "standalone",
+    "background_color": "#000000",
+    "theme_color": "#e50914",
+    "icons": [
+        {
+            "src": "https://cdn-icons-png.flaticon.com/512/3211/3211422.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}
