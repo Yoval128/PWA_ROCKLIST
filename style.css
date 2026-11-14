@@ -1,78 +1,295 @@
-/* Colores simples y modo oscuro por defecto */
-body {
-    background-color: #121212;
-    color: #ffffff;
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+/* ============================================================
+   RockList PWA — v2 Stylesheet
+   Paleta: Oscuro profundo + Naranja ámbar (rock/metal vibe)
+   Responsive: mobile-first con breakpoints sm / md / lg
+   ============================================================ */
+
+/* --- Variables de diseño --- */
+:root {
+    --color-bg:        #0d0d0d;
+    --color-surface:   #1a1a2e;
+    --color-surface2:  #16213e;
+    --color-accent:    #f5a623;
+    --color-accent2:   #e8831a;
+    --color-success:   #2ecc71;
+    --color-danger:    #e74c3c;
+    --color-muted:     #8892a4;
+    --color-text:      #eaf0fb;
+    --color-subtext:   #a0aec0;
+    --color-border:    #2d3748;
+    --radius:          8px;
+    --radius-lg:       14px;
+    --transition:      0.2s ease;
 }
 
-/* Control de pantallas */
+/* --- Reset & Base --- */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: 'Segoe UI', system-ui, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+/* --- Control de pantallas --- */
 .screen {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
+
+.oculto { display: none !important; }
+
+/* ============================================================
+   SPLASH SCREEN
+   ============================================================ */
 #splash {
     justify-content: center;
     align-items: center;
-    background-color: #000000;
-    color: #e50914; /* Rojo Rockero */
-}
-.oculto {
-    display: none !important;
+    background: linear-gradient(145deg, #0d0d0d 0%, #1a1a2e 100%);
+    gap: 12px;
 }
 
-/* Diseño del Home */
+#splash h1 {
+    font-size: clamp(2.5rem, 8vw, 4rem);
+    color: var(--color-accent);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+#splash p {
+    color: var(--color-muted);
+    font-size: 1rem;
+    margin: 0;
+    animation: pulse 1.4s infinite alternate;
+}
+
+@keyframes pulse {
+    from { opacity: 0.4; }
+    to   { opacity: 1;   }
+}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
 header {
-    background-color: #e50914;
-    padding: 15px;
+    background-color: var(--color-surface);
+    border-bottom: 3px solid var(--color-accent);
+    padding: 14px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
-header h2 { margin: 0; }
-.badge {
-    background: #28a745;
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-size: 14px;
-}
-.badge.offline { background: #dc3545; }
 
-main { padding: 20px; }
+header h2 {
+    margin: 0;
+    font-size: clamp(1.2rem, 4vw, 1.6rem);
+    color: var(--color-accent);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.badge {
+    background: var(--color-success);
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: background var(--transition);
+}
+
+.badge.offline { background: var(--color-danger); }
+
+/* ============================================================
+   MAIN CONTENT — responsive container
+   ============================================================ */
+main {
+    padding: 20px 16px;
+    width: 100%;
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+/* ============================================================
+   BOTÓN GENERAL
+   ============================================================ */
+button {
+    padding: 11px 16px;
+    background-color: var(--color-accent);
+    color: #0d0d0d;
+    border: none;
+    border-radius: var(--radius);
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    width: 100%;
+    transition: background var(--transition), transform var(--transition);
+}
+
+button:hover  { background-color: var(--color-accent2); }
+button:active { transform: scale(0.98); }
+
+button.btn-secondary {
+    background-color: var(--color-surface2);
+    color: var(--color-subtext);
+    border: 1px solid var(--color-border);
+}
+button.btn-secondary:hover { background-color: var(--color-border); color: var(--color-text); }
+
+button.btn-danger {
+    background-color: transparent;
+    color: var(--color-danger);
+    border: 1px solid var(--color-danger);
+    width: auto;
+    padding: 4px 10px;
+    font-size: 13px;
+}
+button.btn-danger:hover { background-color: var(--color-danger); color: #fff; }
+
+/* ============================================================
+   FORMULARIO
+   ============================================================ */
 form {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
+    background: var(--color-surface);
+    padding: 20px;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
 }
-input {
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #333;
-    background: #222;
-    color: white;
-}
-button {
-    padding: 10px;
-    background-color: #e50914;
-    color: white;
-    border: none;
-    font-size: 16px;
-    cursor: pointer;
-    font-weight: bold;
-}
-button:hover { background-color: #b0070f; }
 
-/* Lista de canciones */
+form h3 {
+    margin: 0 0 4px;
+    color: var(--color-accent);
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+input {
+    padding: 10px 14px;
+    font-size: 15px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-bg);
+    color: var(--color-text);
+    transition: border-color var(--transition);
+    width: 100%;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--color-accent);
+}
+
+input::placeholder { color: var(--color-muted); }
+
+#txtUbicacion {
+    color: var(--color-subtext);
+    font-size: 13px;
+    min-height: 18px;
+}
+
+/* ============================================================
+   LISTA DE CANCIONES
+   ============================================================ */
+.section-title {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--color-muted);
+    margin: 0 0 12px;
+}
+
 ul {
     list-style: none;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
+
 li {
-    background: #222;
-    margin-bottom: 8px;
-    padding: 10px;
-    border-left: 4px solid #e50914;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-left: 4px solid var(--color-accent);
+    border-radius: var(--radius);
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+    transition: border-color var(--transition);
+}
+
+li:hover { border-color: var(--color-accent2); }
+
+.li-info { flex: 1; min-width: 0; }
+
+li strong {
+    display: block;
+    color: var(--color-text);
+    font-size: 15px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+li .li-band { color: var(--color-subtext); font-size: 14px; }
+li small { color: var(--color-muted); font-size: 12px; display: block; margin-top: 2px; }
+
+.tag-sync {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 20px;
+    margin-top: 4px;
+    background: color-mix(in srgb, var(--color-success) 15%, transparent);
+    color: var(--color-success);
+}
+.tag-sync.pendiente {
+    background: color-mix(in srgb, var(--color-danger) 15%, transparent);
+    color: var(--color-danger);
+}
+
+/* ============================================================
+   RESPONSIVE BREAKPOINTS
+   ============================================================ */
+
+/* sm: ≥ 480px */
+@media (min-width: 480px) {
+    main { padding: 24px 20px; }
+}
+
+/* md: ≥ 768px */
+@media (min-width: 768px) {
+    main { padding: 32px 24px; }
+
+    form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+    form h3        { grid-column: 1 / -1; }
+    #txtUbicacion  { grid-column: 1 / -1; }
+    #btnUbicacion  { grid-column: 1 / -1; }
+    form button[type="submit"] { grid-column: 1 / -1; }
+}
+
+/* lg: ≥ 1024px */
+@media (min-width: 1024px) {
+    main { max-width: 860px; padding: 40px 32px; }
 }

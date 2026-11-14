@@ -3,48 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RockList PWA - V2</title>
+    <meta name="description" content="RockList — Tu setlist de rock siempre contigo, online y offline.">
+    <meta name="theme-color" content="#f5a623">
+    <title>RockList PWA</title>
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
 </head>
 <body>
+
     <!-- Pantalla 1: Splash Screen -->
-    <div id="splash" class="screen">
+    <div id="splash" class="screen" role="status" aria-label="Cargando RockList">
         <h1>RockList</h1>
         <p>Cargando amplificadores...</p>
     </div>
 
     <!-- Pantalla 2: Home Screen -->
     <div id="home" class="screen oculto">
-        <header>
+
+        <header role="banner">
             <h2>Mi Setlist</h2>
-            <span id="status" class="badge">Conectado</span>
+            <span id="status" class="badge" aria-live="polite">Conectado</span>
         </header>
 
-        <main>
-            <!-- Punto 2.3: Control de Notificaciones -->
-            <button id="btnNotificaciones" style="background-color: #555; margin-bottom: 15px;">
-                Activar Notificaciones
+        <main role="main">
+
+            <!-- Notificaciones -->
+            <button id="btnNotificaciones" class="btn-secondary" style="margin-bottom:16px;">
+                🔔 Activar Notificaciones
             </button>
 
             <!-- Formulario de captura -->
-            <form id="rockForm">
-                <input type="text" id="song" placeholder="Canción (ej. Back in Black)" required>
-                <input type="text" id="band" placeholder="Banda / Artista" required>
-                
-                <!-- Punto 2.4: Característica Física (Geolocalización) -->
-                <button type="button" id="btnUbicacion" style="background-color: #007bff;">
-                    Capturar mi ubicación actual
-                </button>
-                <small id="txtUbicacion" style="color: #ccc;">Ubicación no capturada</small>
+            <form id="rockForm" novalidate>
+                <h3>Agregar al Setlist</h3>
 
-                <button type="submit" style="margin-top: 10px;">Agregar al Setlist</button>
+                <input type="text" id="song" placeholder="Canción (ej. Back in Black)" required autocomplete="off">
+                <input type="text" id="band" placeholder="Banda / Artista" required autocomplete="off">
+
+                <!-- Geolocalización -->
+                <button type="button" id="btnUbicacion" class="btn-secondary">
+                    📍 Capturar mi ubicación actual
+                </button>
+                <small id="txtUbicacion">Ubicación no capturada</small>
+
+                <button type="submit">+ Agregar al Setlist</button>
             </form>
 
-            <button id="syncBtn" class="oculto">Sincronizar datos pendientes</button>
+            <!-- Sincronización -->
+            <button id="syncBtn" class="oculto btn-secondary" style="margin-bottom:16px;">
+                ⟳ Sincronizar datos pendientes
+            </button>
 
-            <h3>Canciones Guardadas:</h3>
-            <ul id="songList"></ul>
+            <!-- Lista -->
+            <p class="section-title">Canciones Guardadas</p>
+            <ul id="songList" role="list" aria-label="Lista de canciones guardadas"></ul>
+
         </main>
     </div>
 
